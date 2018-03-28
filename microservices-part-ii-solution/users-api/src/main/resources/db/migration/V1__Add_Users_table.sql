@@ -1,6 +1,7 @@
 create table USERS (
   ID serial,
-  USER_NAME varchar(100) NOT NULL,
-  FIRST_NAME VARCHAR(100) NOT NULL,
-  LAST_NAME VARCHAR(100) NOT NULL
+  business_name VARCHAR(100) NOT NULL,
+  address_zip VARCHAR(100) NOT NULL,
+  address_borough VARCHAR(100) NOT NULL,
+  address_city VARCHAR(100) NOT NULL
 )

@@ -33,6 +33,7 @@ services:
         volumes:
           - ./users-api:/users-api:cached
         depends_on:
+          - eureka
           - postgresdev
         command: './gradlew bootRun'
         environment:

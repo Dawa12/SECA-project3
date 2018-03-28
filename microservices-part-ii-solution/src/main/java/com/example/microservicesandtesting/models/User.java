@@ -23,8 +23,9 @@ public class User {
     private String lastName;
 
     public User(String userName, String firstName, String lastName) {
-        this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.businessName = businessName;
+        this.addressZip = addressZip;
+        this.addressBorough = addressBorough;
+        this.addressCity = addressCity;
     }
 }
