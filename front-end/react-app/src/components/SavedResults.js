@@ -4,6 +4,7 @@ class SavedResults extends Component {
   render() {
     let tableHeaders;
     let tableRows = [];
+    let filteredRows = [];
     let loading = (
       <tr>
         <td>Loading...</td>
@@ -28,7 +29,14 @@ class SavedResults extends Component {
 
       const data = this.props.saved;
 
-      tableRows = data.map((value, mapIndex) => {
+      filteredRows = data.filter((value, mapIndex) => {
+        return value.businessName
+          .toLowerCase()
+          .includes(this.props.searchTerm.toLowerCase());
+      });
+
+      tableRows = filteredRows.map((value, mapIndex) => {
+        // debugger;
         return (
           <tr key={mapIndex}>
             {/* <td>{value.license_nbr}</td> */}

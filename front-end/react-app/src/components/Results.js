@@ -51,6 +51,7 @@ class Results extends Component {
 
     return (
       <div>
+        <h2>Business Results</h2>
         <table>
           <tbody>
             {tableHeaders ? tableHeaders : loading}

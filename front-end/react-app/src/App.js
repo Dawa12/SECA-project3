@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Results from './components/Results';
 import './App.css';
-import SavedResults from './components/SavedResults';
+// import SavedResults from './components/SavedResults';
+import Search from './components/Search';
 
 class App extends Component {
   constructor() {
@@ -50,7 +51,10 @@ class App extends Component {
     // create copy of values of array this.props.saved
     const saved = this.state.saved.slice();
     // delete saved[id];
-    delete saved[Object.values(...saved).indexOf(id)];
+    // debugger;
+    saved.splice(Object.values(...saved).indexOf(id), 1);
+
+    // delete saved[Object.values(...saved).indexOf(id)];
     // debugger;
     this.setState({ saved });
   };
@@ -94,11 +98,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Businesses in Queens</h1>
         <Results handleSave={this.handleSave} {...this.state} />
-        <SavedResults
-          handleDelete={this.handleDelete}
-          saved={this.state.saved}
-        />
+        <Search handleDelete={this.handleDelete} saved={this.state.saved} />
       </div>
     );
   }
