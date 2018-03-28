@@ -9,14 +9,6 @@ table {
   min-width: 500px;
 }
 
-form {
-  text-align: center;
-  /* border: 1px solid blue; */
-  /* width: 80%; */
-  margin: 0 auto;
-  margin-top: 100px;
-}
-
 table th {
   padding: 5px 10px;
   background-color: #a0e2a0;
