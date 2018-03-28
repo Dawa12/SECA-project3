@@ -1,5 +1,40 @@
+table {
+  border: 2px solid black;
+  /* height: 400px; */
+  /* max-width: 80%; */
+  margin: 10px auto;
+  /* overflow-x: scroll; */
+  table-layout: fixed;
+  /* max-width: 500px; */
+  min-width: 500px;
+}
+
+form {
+  text-align: center;
+  /* border: 1px solid blue; */
+  /* width: 80%; */
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+table th {
+  padding: 5px 10px;
+  background-color: #a0e2a0;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
 .App {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -23,6 +58,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
