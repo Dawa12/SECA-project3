@@ -29,17 +29,17 @@ class SavedResults extends Component {
 
       const data = this.props.saved;
 
+      // filter results by user's search term
       filteredRows = data.filter((value, mapIndex) => {
         return value.businessName
           .toLowerCase()
           .includes(this.props.searchTerm.toLowerCase());
       });
 
+      // return table row of filtered results
       tableRows = filteredRows.map((value, mapIndex) => {
-        // debugger;
         return (
           <tr key={mapIndex}>
-            {/* <td>{value.license_nbr}</td> */}
             <td>{value.id}</td>
             <td>{value.businessName}</td>
             <td>{value.addressZip}</td>

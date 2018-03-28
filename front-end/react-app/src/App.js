@@ -50,7 +50,7 @@ class App extends Component {
 
     // create copy of values of array this.props.saved
     const saved = this.state.saved.slice();
-    // delete saved[id];
+    // delete saved[id];  ==> will return null on deleted element
     // debugger;
     saved.splice(Object.values(...saved).indexOf(id), 1);
 
