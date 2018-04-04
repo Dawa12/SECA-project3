@@ -109,9 +109,9 @@ public class UsersApiFeatureTest {
 //        secondUser.setFirstName("changed_name");
 //
         given()
-                .contentType(JSON)
-                .and().body(secondUser)
-                .when()
+//                .contentType(JSON)
+//                .and().body(secondUser)
+//                .when()
                 .patch("http://localhost:8080/users/" + firstUser.getId())
                 .then()
                 .statusCode(is(200))
