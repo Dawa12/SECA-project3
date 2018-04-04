@@ -19,11 +19,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    business_name VARCHAR(100),
-//    address_zip VARCHAR(100),
-//    address_borough VARCHAR(100),
-//    address_city VARCHAR(100)
-
     @Column(name = "business_name")
     private String businessName;
 

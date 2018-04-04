@@ -36,11 +36,7 @@ class Results extends Component {
             <td>{value.address_borough}</td>
             <td>{value.address_city}</td>
             <td>
-              <button
-                onClick={() =>
-                  this.props.handleSave(mapIndex, value.licenseNumber)
-                }
-              >
+              <button onClick={() => this.props.handleSave(mapIndex)}>
                 Save
               </button>
             </td>

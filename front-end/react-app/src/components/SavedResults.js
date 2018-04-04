@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 
 class SavedResults extends Component {
-  render() {
-    let tableHeaders;
-    let tableRows = [];
-    let filteredRows = [];
-    let loading = (
+  state = {
+    tableHeaders: undefined,
+    tableRows: [],
+    // filteredRows: [],
+    loading: (
       <tr>
         <td>Loading...</td>
       </tr>
-    );
+    )
+  };
 
+  componentDidMount() {
+    let tableRows;
     let loadingCell = <td>Loading...</td>;
-
-    // prevent errors by checking state fetched data and has content
-    if (this.props.saved.length > 0) {
-      tableHeaders = (
+    console.log('mounting saved results component');
+    console.log('updating tableheaders state!');
+    this.setState({
+      tableHeaders: (
         <tr>
-          {/* <th>license number</th> */}
           <th>id</th>
           <th>business name</th>
           <th>address zip</th>
@@ -25,45 +27,48 @@ class SavedResults extends Component {
           <th>address city</th>
           <th>action</th>
         </tr>
+      )
+    });
+  }
+
+  render() {
+    const data = this.props.saved;
+
+    // filter results by user's search term
+    const filteredRows = data.filter((value, mapIndex) => {
+      return value.businessName
+        .toLowerCase()
+        .includes(this.props.searchTerm.toLowerCase());
+    });
+
+    let tableRows = filteredRows.map((value, mapIndex) => {
+      return (
+        <tr key={mapIndex}>
+          <td>{value.id}</td>
+          <td>{value.businessName}</td>
+          <td>{value.addressZip}</td>
+          <td>{value.addressBorough}</td>
+          <td>{value.addressCity}</td>
+
+          <td>
+            <button onClick={() => this.props.handleDelete(mapIndex, value.id)}>
+              Delete
+            </button>
+          </td>
+        </tr>
       );
-
-      const data = this.props.saved;
-
-      // filter results by user's search term
-      filteredRows = data.filter((value, mapIndex) => {
-        return value.businessName
-          .toLowerCase()
-          .includes(this.props.searchTerm.toLowerCase());
-      });
-
-      // return table row of filtered results
-      tableRows = filteredRows.map((value, mapIndex) => {
-        return (
-          <tr key={mapIndex}>
-            <td>{value.id}</td>
-            <td>{value.businessName}</td>
-            <td>{value.addressZip}</td>
-            <td>{value.addressBorough}</td>
-            <td>{value.addressCity}</td>
-
-            <td>
-              <button
-                onClick={() => this.props.handleDelete(mapIndex, value.id)}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        );
-      });
-    }
+    });
 
     return (
       <div>
         <table>
           <tbody>
-            {tableHeaders ? tableHeaders : loading}
-            {tableRows ? tableRows : loading}
+            {this.state.tableHeaders
+              ? this.state.tableHeaders
+              : this.state.loading}
+            {/* {this.state.tableRows ? this.state.tableRows : this.state.loading} */}
+
+            {tableRows ? tableRows : this.state.loading}
           </tbody>
         </table>
       </div>

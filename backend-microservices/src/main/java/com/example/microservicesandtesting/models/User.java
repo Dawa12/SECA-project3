@@ -13,16 +13,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USER_NAME")
-    private String userName;
+    @Column(name = "business_name")
+    private String businessName;
 
-    @Column(name = "FIRST_NAME")
-    private String firstName;
+    @Column(name = "address_zip")
+    private String addressZip;
 
-    @Column(name = "LAST_NAME")
-    private String lastName;
+    @Column(name = "address_borough")
+    private String addressBorough;
 
-    public User(String userName, String firstName, String lastName) {
+    @Column(name = "address_city")
+    private String addressCity;
+
+    public User(String businessName, String addressZip, String addressBorough, String addressCity) {
         this.businessName = businessName;
         this.addressZip = addressZip;
         this.addressBorough = addressBorough;

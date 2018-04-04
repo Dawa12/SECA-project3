@@ -22,6 +22,7 @@ public class UsersController {
 
     @GetMapping("/")
     public Iterable<User> findAllUsers() {
+        System.out.println("testing home page");
         return userRepository.findAll();
     }
 
@@ -33,7 +34,6 @@ public class UsersController {
         if (foundUser == null) {
             throw new NotFoundException("User with ID of " + userId + " was not found!");
         }
-
 
         return foundUser;
     }

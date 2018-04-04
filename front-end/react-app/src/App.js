@@ -13,7 +13,7 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const url = `https://data.cityofnewyork.us/resource/h5tz-kn86.json?$limit=10`;
     // 'https://data.cityofnewyork.us/resource/jff5-ygbi.json?$limit=10';
 
@@ -21,55 +21,37 @@ class App extends Component {
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
-        console.log('Success:', response);
+        console.log('Successful fetch to CityData API:', response);
         const data = this.state.data.slice();
         this.setState({ data: response });
       });
 
+    // view all saved users
     fetch(`http://localhost:8080/users`)
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
+        // if (!response) return; // if undefined then return function
         console.log('Success:', response);
+        console.log(this.state);
         const saved = this.state.saved.slice();
         this.setState({ saved: response });
       });
   }
 
-  handleDelete = (index, id) => {
-    const url = `http://localhost:8080/users/${id}`;
-
-    fetch(url, {
-      method: 'DELETE'
-    })
-      .then(res => res.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => {
-        console.log('Successful Delete! ', response);
-      });
-
-    // create copy of values of array this.props.saved
-    const saved = this.state.saved.slice();
-    // delete saved[id];  ==> will return null on deleted element
-    // debugger;
-    saved.splice(Object.values(...saved).indexOf(id), 1);
-
-    // delete saved[Object.values(...saved).indexOf(id)];
-    // debugger;
-    this.setState({ saved });
-  };
-
   handleSave = index => {
     const url = 'http://localhost:8080/users';
 
-    // create copy of values of array this.props.saved
     const saved = this.state.saved.slice();
+    // }
+    // const saved = this.saved.slice();
     // filter data for index at which user clicked "save"
     const result = this.state.data[index];
 
     fetch(url, {
       method: 'POST', // or 'PUT'
       body: JSON.stringify({
+        // remove string from DCA license
         businessName: result.business_name,
         addressZip: result.address_zip,
         addressBorough: result.address_borough,
@@ -93,6 +75,28 @@ class App extends Component {
 
         this.setState({ saved });
       });
+  };
+
+  handleDelete = (index, id) => {
+    const url = `http://localhost:8080/users/${id}`;
+
+    fetch(url, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => {
+        console.log('Successful Delete! ', response);
+      });
+
+    // create copy of values of array this.props.saved
+    const saved = this.state.saved.slice();
+    // delete saved[id];  ==> will return null on deleted element
+    //
+    saved.splice(Object.values(...saved).indexOf(id), 1);
+
+    // delete saved[Object.values(...saved).indexOf(id)];
+    this.setState({ saved });
   };
 
   render() {
