@@ -37,11 +37,6 @@ public class UsersApiFeatureTest {
         userRepository.deleteAll();
     }
 
-
-//    public User(String businessName, String addressZip, String addressBorough, String addressCity) {
-
-
-
     @Test
     public void shouldAllowFullCrudForAUser() throws Exception {
         User firstUser = new User(

@@ -31,26 +31,15 @@ public class User {
     @Column(name = "address_city")
     private String addressCity;
 
-    public User(String businessName, String addressZip, String addressBorough, String addressCity) {
+    @Column(name = "notes")
+    private String notes;
+
+    public User(String businessName, String addressZip, String addressBorough, String addressCity, String notes) {
         this.businessName = businessName;
         this.addressZip = addressZip;
         this.addressBorough = addressBorough;
         this.addressCity = addressCity;
+        this.notes = notes;
     }
-
-//    @Column(name = "USER_NAME")
-//    private String userName;
-//
-//    @Column(name = "FIRST_NAME")
-//    private String firstName;
-//
-//    @Column(name = "LAST_NAME")
-//    private String lastName;
-//
-//    public User(String userName, String firstName, String lastName) {
-//        this.userName = userName;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//    }
 
 }
