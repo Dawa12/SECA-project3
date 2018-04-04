@@ -9,7 +9,24 @@ class SavedResults extends Component {
       <tr>
         <td>Loading...</td>
       </tr>
-    )
+    ),
+    notes: ['hello'],
+    isUpdating: false
+  };
+
+  // handleChange(e) {
+  handleChange = e => {
+    const notes = [];
+    notes[0] = e.target.value;
+    this.setState({ notes });
+  };
+
+  handleButtonClick = () => {
+    this.setState({ isUpdating: !this.state.isUpdating });
+  };
+
+  handleDoneClick = () => {
+    this.handleButtonClick();
   };
 
   componentDidMount() {
@@ -25,6 +42,7 @@ class SavedResults extends Component {
           <th>address zip</th>
           <th>address borough</th>
           <th>address city</th>
+          <th>notes</th>
           <th>action</th>
         </tr>
       )
@@ -33,6 +51,26 @@ class SavedResults extends Component {
 
   render() {
     const data = this.props.saved;
+    let toggleButton = <button onClick={this.handleButtonClick}>Update</button>;
+    let textAreaToggle = (
+      <div className="textPlaceholder">{this.state.notes}</div>
+    );
+
+    if (this.state.isUpdating) {
+      console.log('is updating: true');
+      toggleButton = <button onClick={this.handleDoneClick}>Done</button>;
+      textAreaToggle = (
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          // value={this.state.notes[mapIndex]}
+          value={this.state.notes[0]}
+          onChange={this.handleChange}
+        />
+      );
+    }
 
     // filter results by user's search term
     const filteredRows = data.filter((value, mapIndex) => {
@@ -49,6 +87,11 @@ class SavedResults extends Component {
           <td>{value.addressZip}</td>
           <td>{value.addressBorough}</td>
           <td>{value.addressCity}</td>
+          <td>
+            {/* notes  */}
+            {toggleButton}
+            {textAreaToggle}
+          </td>
 
           <td>
             <button onClick={() => this.props.handleDelete(mapIndex, value.id)}>
@@ -66,8 +109,6 @@ class SavedResults extends Component {
             {this.state.tableHeaders
               ? this.state.tableHeaders
               : this.state.loading}
-            {/* {this.state.tableRows ? this.state.tableRows : this.state.loading} */}
-
             {tableRows ? tableRows : this.state.loading}
           </tbody>
         </table>
