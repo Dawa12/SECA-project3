@@ -108,14 +108,14 @@ public class UsersApiFeatureTest {
 //        // Test updating a user
 //        secondUser.setFirstName("changed_name");
 //
-        given()
-//                .contentType(JSON)
-//                .and().body(secondUser)
-//                .when()
-                .patch("http://localhost:8080/users/" + firstUser.getId())
-                .then()
-                .statusCode(is(200))
-                .and().body(containsString("Starbucks"));
+//        given()
+////                .contentType(JSON)
+////                .and().body(secondUser)
+////                .when()
+//                .patch("http://localhost:8080/users/" + firstUser.getId())
+//                .then()
+//                .statusCode(is(200))
+//                .and().body(containsString("Starbucks"));
 //
 //        // Test deleting a user
         when()
