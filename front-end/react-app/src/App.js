@@ -66,7 +66,7 @@ class App extends Component {
       .then(response => {
         console.log('Success:', response);
         saved.push({
-          // licenseNumber: result.license_nbr,
+          id: response.id,
           businessName: result.business_name,
           addressZip: result.address_zip,
           addressBorough: result.address_borough,
