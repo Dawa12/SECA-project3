@@ -88,40 +88,40 @@ public class UsersApiFeatureTest {
 //                .and().body(containsString("Bene"));
 
 //
-//        // Test get all Users
-//        when()
-//                .get("http://localhost:8080/users/")
-//                .then()
-//                .statusCode(is(200))
-//                .and().body(containsString("Bene"))
-//                .and().body(containsString("Best"))
-//                .and().body(containsString("Star"));
+        // Test get all Users
+        when()
+                .get("http://localhost:8080/users/")
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("Bene"))
+                .and().body(containsString("Best"))
+                .and().body(containsString("Star"));
 
 //        // Test finding one user by ID
-//        when()
-//                .get("http://localhost:8080/users/" + secondUser.getId())
-//                .then()
-//                .statusCode(is(200))
-//                .and().body(containsString("Someone"))
-//                .and().body(containsString("Else"));
-//
+        when()
+                .get("http://localhost:8080/users/" + secondUser.getId())
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("Best"))
+                .and().body(containsString("Northern"));
+
 //        // Test updating a user
 //        secondUser.setFirstName("changed_name");
 //
-//        given()
-//                .contentType(JSON)
-//                .and().body(secondUser)
-//                .when()
-//                .patch("http://localhost:8080/users/" + secondUser.getId())
-//                .then()
-//                .statusCode(is(200))
-//                .and().body(containsString("changed_name"));
+        given()
+                .contentType(JSON)
+                .and().body(secondUser)
+                .when()
+                .patch("http://localhost:8080/users/" + firstUser.getId())
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("Starbucks"));
 //
 //        // Test deleting a user
-//        when()
-//                .delete("http://localhost:8080/users/" + secondUser.getId())
-//                .then()
-//                .statusCode(is(200));
+        when()
+                .delete("http://localhost:8080/users/" + secondUser.getId())
+                .then()
+                .statusCode(is(200));
 //    }
     }
 }
