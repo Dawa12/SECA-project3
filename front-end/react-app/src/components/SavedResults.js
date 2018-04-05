@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 
 class SavedResults extends Component {
-  state = {
-    tableHeaders: undefined,
-    tableRows: [],
-    // filteredRows: [],
-    loading: (
-      <tr>
-        <td>Loading...</td>
-      </tr>
-    ),
-    notes: ['hello'],
-    isUpdating: false
-  };
+  constructor(props) {
+    super(props);
+    // debugger;
+    this.state = {
+      tableHeaders: undefined,
+      tableRows: [],
+      // filteredRows: [],
+      loading: (
+        <tr>
+          <td>Loading...</td>
+        </tr>
+      ),
+      notes: ['test'],
+      // notes: [props.saved[0].notes],
+      isUpdating: false
+    };
+  }
 
   // handleChange(e) {
   handleChange = e => {
@@ -25,14 +30,50 @@ class SavedResults extends Component {
     this.setState({ isUpdating: !this.state.isUpdating });
   };
 
-  handleDoneClick = () => {
+  handleDoneClick = id => {
     this.handleButtonClick();
+    const url = `http://localhost:8080/users/${id}`;
+
+    // debugger;
+    fetch(url, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        businessName: this.props.saved[0].businessName,
+        addressZip: this.props.saved[0].addressZip,
+        addressBorough: this.props.saved[0].addressBorough,
+        addressCity: this.props.saved[0].addressCity,
+        notes: this.state.notes[0]
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+      // mode: 'no-cors'
+    })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => {
+        console.log('Successful PATCH update:', response);
+      });
+    //   saved.push({
+    //     id: response.id,
+    //     businessName: result.business_name,
+    //     addressZip: result.address_zip,
+    //     addressBorough: result.address_borough,
+    //     addressCity: result.address_city
+    //   });
+
+    //   this.setState({ saved });
   };
+  // // };
+
+  // componentWillMount() {
+  //   this.setState({ notes: this.props.saved[0].notes });
+  // }
 
   componentDidMount() {
     let tableRows;
     let loadingCell = <td>Loading...</td>;
-    console.log('mounting saved results component');
+
     console.log('updating tableheaders state!');
     this.setState({
       tableHeaders: (
@@ -51,14 +92,14 @@ class SavedResults extends Component {
 
   render() {
     const data = this.props.saved;
-    let toggleButton = <button onClick={this.handleButtonClick}>Update</button>;
+    // let toggleButton = <button onClick={this.handleButtonClick}>Update</button>;
     let textAreaToggle = (
       <div className="textPlaceholder">{this.state.notes}</div>
+      // <div className="textPlaceholder">{this.props.saved[0].notes}</div>
     );
 
     if (this.state.isUpdating) {
       console.log('is updating: true');
-      toggleButton = <button onClick={this.handleDoneClick}>Done</button>;
       textAreaToggle = (
         <textarea
           name=""
@@ -66,7 +107,8 @@ class SavedResults extends Component {
           cols="30"
           rows="10"
           // value={this.state.notes[mapIndex]}
-          value={this.state.notes[0]}
+          // value={this.state.notes[0]}
+          value={this.state.notes}
           onChange={this.handleChange}
         />
       );
@@ -88,8 +130,14 @@ class SavedResults extends Component {
           <td>{value.addressBorough}</td>
           <td>{value.addressCity}</td>
           <td>
-            {/* notes  */}
-            {toggleButton}
+            {this.state.isUpdating ? (
+              <button onClick={() => this.handleDoneClick(value.id)}>
+                Done
+              </button>
+            ) : (
+              <button onClick={this.handleButtonClick}>Update</button>
+            )}
+
             {textAreaToggle}
           </td>
 
