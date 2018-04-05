@@ -61,7 +61,7 @@ public class UsersController {
         userFromDb.setAddressZip( userRequest.getAddressZip() );
         userFromDb.setAddressBorough( userRequest.getAddressBorough() );
         userFromDb.setAddressCity( userRequest.getAddressCity() );
-        userFromDb.setNotes( userRequest.setNotes() );
+        userFromDb.setNotes( userRequest.getNotes() );
 
         return userRepository.save(userFromDb);
     }

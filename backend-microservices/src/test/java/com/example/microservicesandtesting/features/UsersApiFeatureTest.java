@@ -73,14 +73,15 @@ public class UsersApiFeatureTest {
                 "New York"
         );
 
+//        post to database
         given()
                 .contentType(JSON)
                 .and().body(userNotYetInDb)
                 .when()
                 .post("http://localhost:8080/users")
                 .then()
-                .statusCode(is(200));
-//                .and().body(containsString("Bene"));
+                .statusCode(is(200))
+                .and().body(containsString("Bene"));
 
 //
         // Test get all Users
@@ -100,9 +101,9 @@ public class UsersApiFeatureTest {
                 .and().body(containsString("Best"))
                 .and().body(containsString("Northern"));
 
-//        // Test updating a user
+        // Test updating a user
 //        secondUser.setFirstName("changed_name");
-//
+
         given()
                 .contentType(JSON)
                 .and().body(secondUser)
@@ -110,8 +111,8 @@ public class UsersApiFeatureTest {
                 .patch("http://localhost:8080/users/" + firstUser.getId())
                 .then()
                 .statusCode(is(200))
-                .and().body(containsString("Starbucks"));
-//
+                .and().body(containsString("BestBuy"));
+
 //        // Test deleting a user
         when()
                 .delete("http://localhost:8080/users/" + secondUser.getId())
