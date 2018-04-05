@@ -13,10 +13,16 @@ class SavedResults extends Component {
           <td>Loading...</td>
         </tr>
       ),
-      notes: ['test'],
+      notes: [''],
       // notes: [props.saved[0].notes],
       isUpdating: false
     };
+  }
+
+  getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.notes != prevState.notes) {
+      this.setState({ notes: nextProps.notes });
+    }
   }
 
   // handleChange(e) {
@@ -109,6 +115,7 @@ class SavedResults extends Component {
           // value={this.state.notes[mapIndex]}
           // value={this.state.notes[0]}
           value={this.state.notes}
+          // value={this.props.saved[0].notes}
           onChange={this.handleChange}
         />
       );
