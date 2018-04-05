@@ -8,6 +8,13 @@
   margin-top: 200px;
 } */
 
+textarea,
+.textPlaceholder {
+  width: 150px;
+  height: 100px;
+  border: 1px solid black;
+}
+
 table {
   border: 2px solid black;
   /* height: 400px; */

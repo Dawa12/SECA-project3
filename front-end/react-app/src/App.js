@@ -55,7 +55,8 @@ class App extends Component {
         businessName: result.business_name,
         addressZip: result.address_zip,
         addressBorough: result.address_borough,
-        addressCity: result.address_city
+        addressCity: result.address_city,
+        notes: ''
       }),
       headers: new Headers({
         'Content-Type': 'application/json'

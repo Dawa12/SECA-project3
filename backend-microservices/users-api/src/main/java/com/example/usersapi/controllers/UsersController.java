@@ -57,15 +57,11 @@ public class UsersController {
             throw new NotFoundException("User with ID of " + userId + " was not found!");
         }
 
-//        userFromDb.setUserName(userRequest.getUserName());
-//        userFromDb.setFirstName(userRequest.getFirstName());
-//        userFromDb.setLastName(userRequest.getLastName());
-//
-
         userFromDb.setBusinessName( userRequest.getBusinessName() );
         userFromDb.setAddressZip( userRequest.getAddressZip() );
         userFromDb.setAddressBorough( userRequest.getAddressBorough() );
         userFromDb.setAddressCity( userRequest.getAddressCity() );
+        userFromDb.setNotes( userRequest.getNotes() );
 
         return userRepository.save(userFromDb);
     }
