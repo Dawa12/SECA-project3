@@ -27,7 +27,7 @@ class App extends Component {
       });
 
     // view all saved users
-    fetch(`http://localhost:8080/users`)
+    fetch(process.env.REACT_APP_HOST)
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   handleSave = index => {
-    const url = 'http://localhost:8080/users';
+    const url = `${REACT_APP_HOST}/users`;
 
     const saved = this.state.saved.slice();
     // }
@@ -79,7 +79,7 @@ class App extends Component {
   };
 
   handleDelete = (index, id) => {
-    const url = `http://localhost:8080/users/${id}`;
+    const url = `${process.env.REACT_APP_HOST}/${id}`;
 
     fetch(url, {
       method: 'DELETE'
