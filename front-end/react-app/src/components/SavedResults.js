@@ -109,6 +109,7 @@ class SavedResults extends Component {
           <td>{value.addressBorough}</td>
           <td>{value.addressCity}</td>
           <td className="text-cell">
+            {/* beginning of conditional rendering */}
             {this.state.isUpdating[mapIndex] ? (
               <div className="text-container">
                 <textarea

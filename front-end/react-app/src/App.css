@@ -34,6 +34,16 @@ textarea,
   padding: 0px;
 }
 
+.title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  color: rgb(160, 50, 50);
+}
+
+h2 {
+  color: rgb(77, 0, 0);
+}
+
 table {
   border: 2px solid black;
   /* height: 400px; */
@@ -47,7 +57,8 @@ table {
 
 table th {
   padding: 5px 10px;
-  background-color: #a0e2a0;
+  /* background-color: #a0e2a0; */
+  background-color: rgb(243, 154, 154);
 }
 
 th,

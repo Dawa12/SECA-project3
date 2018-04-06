@@ -107,7 +107,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Businesses in Queens</h1>
+        <h1 className="title">Businesses in Queens</h1>
         <Results handleSave={this.handleSave} {...this.state} />
         <Search handleDelete={this.handleDelete} saved={this.state.saved} />
       </div>
