@@ -15,32 +15,41 @@ class SavedResults extends Component {
       ),
       notes: [''],
       // notes: [props.saved[0].notes],
-      isUpdating: false
+      // isUpdating: false
+      isUpdating: [false]
     };
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('will receive props: ', nextProps);
-    const notes = [...this.state.notes];
+    let notes = [...this.state.notes];
     if (nextProps.saved) {
       // debugger;
-      notes[0] = nextProps.saved[0].notes;
+      // notes = nextProps.saved.notes;
+
+      notes = nextProps.saved.map(obj => {
+        return obj.notes;
+      });
+
       this.setState({ notes });
     }
   }
 
-  handleChange = e => {
-    const notes = [];
-    notes[0] = e.target.value;
+  handleChange = (e, index) => {
+    let notes = [...this.state.notes];
+    notes[index] = e.target.value;
     this.setState({ notes });
   };
 
   handleButtonClick = id => {
-    this.setState({ isUpdating: !this.state.isUpdating });
+    const isUpdating = [...this.state.isUpdating];
+    isUpdating[id] = !this.state.isUpdating[id];
+
+    this.setState({ isUpdating });
   };
 
-  handleDoneClick = id => {
-    this.handleButtonClick();
+  handleDoneClick = (id, index) => {
+    this.handleButtonClick(index);
     const url = `http://localhost:8080/users/${id}`;
 
     // debugger;
@@ -51,7 +60,7 @@ class SavedResults extends Component {
         addressZip: this.props.saved[0].addressZip,
         addressBorough: this.props.saved[0].addressBorough,
         addressCity: this.props.saved[0].addressCity,
-        notes: this.state.notes[0]
+        notes: this.state.notes[index]
       }),
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -86,25 +95,18 @@ class SavedResults extends Component {
 
   render() {
     const data = this.props.saved;
-    // let toggleButton = <button onClick={this.handleButtonClick}>Update</button>;
-    let textAreaToggle = (
-      <div className="textPlaceholder">{this.state.notes}</div>
-      // <div className="textPlaceholder">{this.props.saved[0].notes}</div>
-    );
+    let textAreaToggle;
 
-    if (this.state.isUpdating) {
-      console.log('is updating: true');
-      textAreaToggle = (
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          value={this.state.notes}
-          onChange={this.handleChange}
-        />
-      );
-    }
+    // textAreaToggle = (
+    //   <textarea
+    //     name=""
+    //     id=""
+    //     cols="30"
+    //     rows="10"
+    //     value={this.state.notes}
+    //     onChange={this.handleChange}
+    //   />
+    // );
 
     // filter results by user's search term
     const filteredRows = data.filter((value, mapIndex) => {
@@ -122,17 +124,34 @@ class SavedResults extends Component {
           <td>{value.addressBorough}</td>
           <td>{value.addressCity}</td>
           <td>
-            {this.state.isUpdating ? (
-              <button onClick={() => this.handleDoneClick(value.id)}>
-                Done
-              </button>
+            {this.state.isUpdating[mapIndex] ? (
+              <div>
+                {/* {textAreaToggle} */}
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  value={this.state.notes[mapIndex]}
+                  onChange={e => this.handleChange(e, mapIndex)}
+                />
+                <button
+                  onClick={() => this.handleDoneClick(value.id, mapIndex)}
+                >
+                  Done
+                </button>
+              </div>
             ) : (
-              <button onClick={() => this.handleButtonClick(value.id)}>
-                Update
-              </button>
-            )}
+              <div>
+                <div className="textPlaceholder">
+                  {this.state.notes[mapIndex]}
+                </div>
 
-            {textAreaToggle}
+                <button onClick={() => this.handleButtonClick(mapIndex)}>
+                  Update
+                </button>
+              </div>
+            )}
           </td>
 
           <td>
