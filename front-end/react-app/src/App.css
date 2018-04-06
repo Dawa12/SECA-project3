@@ -93,3 +93,13 @@ tr:hover {
     transform: rotate(360deg);
   }
 }
+@media screen and (max-width: 720px) {
+  .text-cell,
+  .inputBox {
+    width: 70px;
+  }
+
+  td {
+    width: 80px;
+  }
+}
