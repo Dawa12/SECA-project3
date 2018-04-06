@@ -15,15 +15,17 @@ class App extends Component {
 
   componentDidMount() {
     const url = `https://data.cityofnewyork.us/resource/h5tz-kn86.json?$limit=10`;
-    // 'https://data.cityofnewyork.us/resource/jff5-ygbi.json?$limit=10';
 
     fetch(url)
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
         console.log('Successful fetch to CityData API:', response);
-        const data = this.state.data.slice();
-        this.setState({ data: response });
+
+        if (response) {
+          const data = this.state.data.slice();
+          this.setState({ data: response });
+        }
       });
 
     // view all saved users
@@ -34,8 +36,10 @@ class App extends Component {
         // if (!response) return; // if undefined then return function
         console.log('Success:', response);
         console.log(this.state);
-        const saved = this.state.saved.slice();
-        this.setState({ saved: response });
+        if (this.state.saved) {
+          const saved = this.state.saved.slice();
+          this.setState({ saved: response });
+        }
       });
   }
 
@@ -94,7 +98,7 @@ class App extends Component {
     const saved = this.state.saved.slice();
     // delete saved[id];  ==> will return null on deleted element
     //
-    saved.splice(Object.values(...saved).indexOf(id), 1);
+    saved.splice(Object.values(...saved).indexOf(index), 1);
 
     // delete saved[Object.values(...saved).indexOf(id)];
     this.setState({ saved });
