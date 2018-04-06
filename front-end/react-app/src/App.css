@@ -8,11 +8,30 @@
   margin-top: 200px;
 } */
 
+.inputBox {
+  width: 170px;
+  overflow: scroll;
+}
+
+.text-cell {
+  width: 170px;
+  height: 121px;
+}
+
+.text-cell button {
+  margin-top: 5px;
+}
+
+td button {
+  height: 37px;
+  border-radius: 12px;
+}
+
 textarea,
 .textPlaceholder {
-  width: 150px;
   height: 100px;
   border: 1px solid black;
+  padding: 0px;
 }
 
 table {
@@ -72,5 +91,15 @@ tr:hover {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media screen and (max-width: 720px) {
+  .text-cell,
+  .inputBox {
+    width: 70px;
+  }
+
+  td {
+    width: 80px;
   }
 }
