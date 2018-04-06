@@ -97,17 +97,6 @@ class SavedResults extends Component {
     const data = this.props.saved;
     let textAreaToggle;
 
-    // textAreaToggle = (
-    //   <textarea
-    //     name=""
-    //     id=""
-    //     cols="30"
-    //     rows="10"
-    //     value={this.state.notes}
-    //     onChange={this.handleChange}
-    //   />
-    // );
-
     // filter results by user's search term
     const filteredRows = data.filter((value, mapIndex) => {
       return value.businessName
@@ -123,11 +112,11 @@ class SavedResults extends Component {
           <td>{value.addressZip}</td>
           <td>{value.addressBorough}</td>
           <td>{value.addressCity}</td>
-          <td>
+          <td className="text-cell">
             {this.state.isUpdating[mapIndex] ? (
-              <div>
-                {/* {textAreaToggle} */}
+              <div className="text-container">
                 <textarea
+                  className="inputBox"
                   name=""
                   id=""
                   cols="30"
@@ -142,8 +131,8 @@ class SavedResults extends Component {
                 </button>
               </div>
             ) : (
-              <div>
-                <div className="textPlaceholder">
+              <div className="text-container">
+                <div className="textPlaceholder inputBox">
                   {this.state.notes[mapIndex]}
                 </div>
 
