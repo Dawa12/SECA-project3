@@ -29,14 +29,13 @@ class SavedResults extends Component {
     }
   }
 
-  // handleChange(e) {
   handleChange = e => {
     const notes = [];
     notes[0] = e.target.value;
     this.setState({ notes });
   };
 
-  handleButtonClick = () => {
+  handleButtonClick = id => {
     this.setState({ isUpdating: !this.state.isUpdating });
   };
 
@@ -57,28 +56,13 @@ class SavedResults extends Component {
       headers: new Headers({
         'Content-Type': 'application/json'
       })
-      // mode: 'no-cors'
     })
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => {
         console.log('Successful PATCH update:', response);
       });
-    //   saved.push({
-    //     id: response.id,
-    //     businessName: result.business_name,
-    //     addressZip: result.address_zip,
-    //     addressBorough: result.address_borough,
-    //     addressCity: result.address_city
-    //   });
-
-    //   this.setState({ saved });
   };
-  // // };
-
-  // componentWillMount() {
-  //   this.setState({ notes: this.props.saved[0].notes });
-  // }
 
   componentDidMount() {
     let tableRows;
@@ -116,10 +100,7 @@ class SavedResults extends Component {
           id=""
           cols="30"
           rows="10"
-          // value={this.state.notes[mapIndex]}
-          // value={this.state.notes[0]}
           value={this.state.notes}
-          // value={this.props.saved[0].notes}
           onChange={this.handleChange}
         />
       );
@@ -146,7 +127,9 @@ class SavedResults extends Component {
                 Done
               </button>
             ) : (
-              <button onClick={this.handleButtonClick}>Update</button>
+              <button onClick={() => this.handleButtonClick(value.id)}>
+                Update
+              </button>
             )}
 
             {textAreaToggle}
