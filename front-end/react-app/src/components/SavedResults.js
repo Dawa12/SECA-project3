@@ -19,9 +19,13 @@ class SavedResults extends Component {
     };
   }
 
-  getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.notes != prevState.notes) {
-      this.setState({ notes: nextProps.notes });
+  componentWillReceiveProps(nextProps) {
+    console.log('will receive props: ', nextProps);
+    const notes = [...this.state.notes];
+    if (nextProps.saved) {
+      // debugger;
+      notes[0] = nextProps.saved[0].notes;
+      this.setState({ notes });
     }
   }
 
