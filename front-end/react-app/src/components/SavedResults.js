@@ -7,30 +7,26 @@ class SavedResults extends Component {
     this.state = {
       tableHeaders: undefined,
       tableRows: [],
-      // filteredRows: [],
       loading: (
         <tr>
           <td>Loading...</td>
         </tr>
       ),
       notes: [''],
-      // notes: [props.saved[0].notes],
-      // isUpdating: false
       isUpdating: [false]
     };
   }
 
+  // refactor to getDerivedStateFromProps(nextProps, prevState) lifecycle method
   componentWillReceiveProps(nextProps) {
-    console.log('will receive props: ', nextProps);
+    // get current notes
     let notes = [...this.state.notes];
-    if (nextProps.saved) {
-      // debugger;
-      // notes = nextProps.saved.notes;
 
+    // if props contain saved items return array of notes and update state
+    if (nextProps.saved) {
       notes = nextProps.saved.map(obj => {
         return obj.notes;
       });
-
       this.setState({ notes });
     }
   }
@@ -56,10 +52,10 @@ class SavedResults extends Component {
     fetch(url, {
       method: 'PATCH',
       body: JSON.stringify({
-        businessName: this.props.saved[0].businessName,
-        addressZip: this.props.saved[0].addressZip,
-        addressBorough: this.props.saved[0].addressBorough,
-        addressCity: this.props.saved[0].addressCity,
+        businessName: this.props.saved[index].businessName,
+        addressZip: this.props.saved[index].addressZip,
+        addressBorough: this.props.saved[index].addressBorough,
+        addressCity: this.props.saved[index].addressCity,
         notes: this.state.notes[index]
       }),
       headers: new Headers({
